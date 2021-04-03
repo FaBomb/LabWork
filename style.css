@@ -1,0 +1,701 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family:'メイリオ', 'Meiryo', sans-serif;
+}
+input, button{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-track{
+    background: #fff;
+    border: none;
+    border-radius: 5px;
+    box-shadow: inset 0 0 2px #777; 
+}
+::-webkit-scrollbar-thumb{
+    background: #ccc;
+    border-radius: 5px;
+    box-shadow: none;
+}
+header{
+    background-color: #8B8B8B;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .logo img{
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+header .logo{
+    margin-left: 5%;
+    width: 60px;
+    height: 60px;
+}
+header nav a{
+    cursor: pointer;
+    color: white;
+    border-top: 3px white solid;
+    border-bottom: 3px white solid;
+    padding: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration:none;
+}
+header nav a:hover{
+    color: rgb(200, 200, 200);
+    border-top: 3px rgb(200, 200, 200) solid;
+    border-bottom: 3px rgb(200, 200, 200) solid;
+    transition: .5s;
+}
+footer {
+    position: absolute;
+    display: inline-block;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    background-color: #8B8B8B;
+    color: white;
+    text-align: center;
+}
+footer .content{
+    margin-top: 30px;
+}
+footer .content h3{
+    font-size: 20px;
+    font-weight: normal;
+}
+footer .content p{
+    font-size: 14px;
+}
+nav{
+    margin-right: 5%;
+}
+/* 管理者ページ */
+.wrapper{
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 120px;
+    box-sizing: border-box;
+}
+.admin{
+    padding-bottom: 180px;
+    display: flex;
+    justify-content: space-around;
+}
+.admin .enter{
+    position: relative;
+    margin-top: 5%;
+    padding: 2% 2% 2% 4%;
+    height: 34vh;
+    width: 400px;
+    border: 1px #707070 solid;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+}
+.admin .enter h3{
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 2.5;
+    color: #707070;
+}
+.admin .enter select{
+    position: absolute;
+    left: 40%;
+    border-radius: 10px;
+    margin-left: 3%;
+    margin-top: 1.2%;
+    padding: 3px;
+}
+.admin .enter input{
+    position: absolute;
+    left: 40%;
+    border: 1px #707070 solid;
+    padding: 5px;
+    width: 24vh;
+    margin-top: .6vh;
+    border-radius: 8px;
+}
+.admin .enter input[type="submit"]{
+    cursor: pointer;
+    background-color: #8B8B8B;
+    position: absolute;
+    border: none;
+    bottom: 30px;
+    padding: 10px;
+    right: 50%;
+    color: white;
+    width: 80px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+}
+.admin .enter input[type="submit"]:hover{
+    background-color: rgb(200, 200, 200);
+    box-shadow: none;
+    transition: .4s;
+}
+.admin .lab_members{
+    position: relative;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 5%;
+    padding: 2% 2% 2% 4%;
+    width: 50vw;
+    border: 1px #707070 solid;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+}
+.admin table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+.admin table th{
+    font-size: 20px;
+}
+.admin table tr{
+    color: #707070;
+    width: 45vw;
+    border-bottom: 1px #dadada solid;
+}
+.admin table .bold{
+    border-bottom: 2px #707070 solid;
+}
+.admin table tr .btns{
+    border-bottom: 1px white solid;
+}
+.admin table td{
+    padding-top: 10px;
+    text-align: center;
+    line-height: 2;
+}
+.admin a, .back{
+    text-align: center;
+    text-decoration: none;
+    display: inline;
+    position: absolute;
+    bottom: 30%;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #2196F3;
+    border: none;
+    padding: 10px;
+    color: white;
+    width: 80px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+}
+.admin a:hover, .back:hover{
+    background-color: #57a1dd;
+    box-shadow: none;
+    transition: .4s;
+}
+/* ログインページ */
+.login {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px #707070 solid;
+    text-align: center;
+    width: 40%;
+    height: 30vh;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+}
+.login form{
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.login form h2{
+    color: #707070;
+    margin-bottom: 1%;
+}
+.login form input[type="text"]{
+    background-color: #F5F5F5;
+    height: 14%;
+    width: 60%;
+    margin: 2%;
+    border-radius: 10px;
+    border: 1px#707070 solid;
+    padding-left: 5%;
+}
+.login form input[type="submit"]{
+    cursor: pointer;
+    background-color: #2196F3;
+    color: white;
+    height: 14%;
+    width: 20%;
+    margin-top: 3%;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}
+.login form input[type="submit"]:hover{
+    background-color: #319cf3;
+    box-shadow: none;
+    transition: .5s;
+}
+.login_validate h2{
+    background-color: #FEEAED;
+    color: #CC0022;
+    font-size: 24px;
+    position: absolute;
+    left: 50%;
+    top: 16%;
+    padding: 20px 40px;
+    border-radius: 20px;
+    transform: translate(-50%, 0);
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+}
+/* インデックスページ */
+.main{
+    display: flex;
+    justify-content: space-between;
+}
+.side{
+    width: 30%;
+    text-align: center;
+}
+.calender{
+    width: 70%;
+    height: 100%;
+    text-align: center;
+    padding: 3vh;
+}
+.calender .date{
+    display: flex;
+    position: absolute;
+    text-align: left;
+    top: 40px;
+    transform: translate(0, -50%);
+    align-items: center;
+}
+.calender .num{
+    line-height: 1; 
+    text-align: center;
+    margin: 0;
+}
+.calender .num h2{
+    color: white;
+    font-weight: 100;
+    font-size: 50px;
+}
+.calender .num p{
+    color: white;
+    font-weight: bold;
+}
+.calender table{
+    width: 100%;
+    height: 83vh;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 2px #707070 solid;
+}
+.calender table td{
+    border: 0.5px #c0c0c0 solid;
+    height: 12vh;
+    width: 10vh;
+    text-align: center;
+    position: static;
+}
+.calender table td .long_text{
+    overflow: auto;
+    display: inline-block;
+    height: 12vh;
+    width: 10vh;
+}
+.calender .btns{
+    display: inline-flex;
+}
+.calender table td p{
+    font-size: 16px;
+    color: #707070;
+}
+.calender table #today p{
+    color: rgb(94, 94, 206);
+    font-weight: bold;
+}
+.calender table td .long_text h5 input{
+    font-size: 1rem;
+    font-weight: bold;
+    border-bottom: 1px #707070 solid;
+    color: #707070;
+}
+.fa-pencil-alt , .fa-trash-alt{
+    cursor: pointer;
+    color: #707070;
+    margin: 5px;
+}
+.fa-pencil-alt:hover , .fa-trash-alt:hover{
+    color:rgb(200, 200, 200);
+    transition: .5s;
+}
+.calender table td .add_btn{
+    cursor: pointer;
+    position: relative;
+    bottom: -6vh;
+    background-color: #B8B8B8;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+.calender table td .add_btn:hover{
+    background-color: #ECECEC;
+    transition: .5s;
+}
+.calender table th{
+    border: 0.5px #c0c0c0 solid;
+    background-color: #F2F2F2;
+    color: #707070;
+}
+.calender table .sun{
+    color: #d87b6b;
+}
+
+.calender .date input[type="submit"]{
+    cursor: pointer;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    transform: scale(0.4,1);
+}
+.calender input[type="submit"]:hover{
+    color: rgb(200, 200, 200);
+    transition: .5s;
+}
+
+#mask.hidden {
+    display: none;
+}
+#modal_1.hidden, #modal_2.hidden,#modal_3.hidden, #modal_4.hidden,#modal_5.hidden, #modal_6.hidden,
+#modal_7.hidden, #modal_8.hidden,#modal_9.hidden, #modal_10.hidden,#modal_11.hidden, #modal_12.hidden,
+#modal_13.hidden, #modal_14.hidden,#modal_15.hidden, #modal_16.hidden,#modal_17.hidden, #modal_18.hidden,
+#modal_19.hidden, #modal_20.hidden,#modal_21.hidden, #modal_22.hidden,#modal_23.hidden, #modal_24.hidden,
+#modal_25.hidden, #modal_26.hidden,#modal_27.hidden, #modal_28.hidden,#modal_29.hidden, #modal_30.hidden,#modal_31.hidden{
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, -120%);
+}
+
+#modal_1, #modal_2,#modal_3, #modal_4,#modal_5, #modal_6,
+#modal_7, #modal_8,#modal_9, #modal_10,#modal_11, #modal_12,
+#modal_13, #modal_14,#modal_15, #modal_16,#modal_17, #modal_18,
+#modal_19, #modal_20,#modal_21, #modal_22,#modal_23, #modal_24,
+#modal_25, #modal_26,#modal_27, #modal_28,#modal_29, #modal_30,#modal_31{
+    position: absolute;
+    top: 100px;
+    transform: translate(-50%, 0);
+    transition: 0.4s;
+    background: white;
+    z-index: 2;
+}
+.modal{
+    width: 350px;
+    height: 450px;
+    left: 50%;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+}
+#mask{
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+}
+.modal h1{
+    color: white;
+    background-color: #8B8B8B;
+    font-size: 2rem;
+    padding: 10px 0;
+    position: static;
+}
+.modal h3{
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 2;
+    color: #707070;
+}
+.modal .close_btn{
+    cursor: pointer;
+    position: absolute;
+    color: white;
+    top: 10px;
+    right: 10px;
+    border-radius: 50%;
+    line-height: 0.2;
+    width: 25px;
+    height: 25px;
+    background-color: #b3b3b3;
+    font-size: 30px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+.modal .close_btn:hover{
+    color: white;
+    background-color: rgb(200, 200, 200);
+    transition: .5s;
+}
+.modal form{
+    height: 85%;
+    text-align: left;
+    margin-left: 10%;
+    margin-top: 5%;
+}
+.modal input{
+    position: absolute;
+    width: 160px;
+    border: 1px #707070 solid;
+    right: 10%;
+    border-radius: 3px;
+    margin-left: 3%;
+    margin-top: 1.2%;
+    padding: 3px;
+}
+.modal select {
+    position: static;
+    border-radius: 3px;
+    margin-left: 3%;
+    margin-top: 1.2%;
+    padding: 3px;
+}
+.modal .time{
+    display: flex;
+}
+.modal .minute{
+    position: absolute;
+    right: 22%;
+}
+.modal .hour{
+    position: absolute;
+    right: 40%;
+}
+.modal .split{
+    position: absolute;
+    right: 35%;
+}
+.modal select{
+    overflow: none;
+}
+.modal .member_box{
+    margin-top: 50px;
+}
+.modal .member{
+    position: absolute;
+    width: 165px;
+    height: 100px;
+    right: 10%;
+    bottom: 18%;
+    margin-top: 20px;
+}
+.modal .member .group option{
+    font-size: 14px;
+    background-color: white;
+    color: #707070;
+}
+.modal .member .group{
+    color: white;
+    padding-top: 3px;
+    margin: 5px;
+    background-color: #8B8B8B;
+    font-weight: bold;
+    font-size: 14px;
+}
+.modal input[type="submit"]{
+    cursor: pointer;
+    background-color: #8B8B8B;
+    position: absolute;
+    border: none;
+    bottom: 25px;
+    padding: 10px;
+    right: 50%;
+    color: white;
+    width: 80px;
+    border-radius: 20px;
+    transform: translate(50%, 0);
+}
+.modal input[type="submit"]:hover{
+    color: white;
+    background-color: rgb(200, 200, 200);
+    transition: .4s;
+}
+.side{
+    width: 25%;
+    margin: 3vh 0 3vh 3vh;
+    background-color: #BCBCBC;
+    border-radius: 10px;
+    align-items: center;
+}
+.side h3{
+    color: white;
+    font-size: 24px;
+    margin-top: 10px;
+}
+.side table{
+    display: inline-block;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: white;
+    overflow: auto;
+    width: 22vw;
+    height: 21vh;
+    border-radius: 10px;
+}
+.side table tr{
+    display: inline-flex;
+    align-items: center;
+    border-spacing: 0;
+    border-bottom: 1px #dddddd solid;
+    width: 22vw;
+}
+.side table td{
+    overflow: auto;
+    padding: 10px;
+    color: #707070;
+}
+.side table .left{
+    border-right: 1px #dddddd solid;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    width: 50%;
+}
+.side table .right{
+    width: 50%;
+}
+.side table .right button{
+    cursor: pointer;
+    color: #707070;
+    font-weight: bold;
+    font-size: 14px;
+}
+.side table .right button:hover{
+    color: rgb(200, 200, 200);
+    transition: .5s;
+}
+.side table .right a{
+    font-size: 12px;
+    color: #8290e7;
+    text-decoration: none;
+}
+.side table .right a:hover{
+    color: rgb(200, 200, 200);
+    transition: .5s;
+}
+/* 詳細ページ */
+.box{
+    text-align: center;
+    border: #707070 1px solid;
+    width: 50%;
+    padding: 0 0 4vh 0;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 50%;
+    top:40%;
+    transform: translate(-50%,-50%);
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+}
+.box h1{
+    color: white;
+    padding-top: 2vh;
+    background-color: #8B8B8B;
+    padding-bottom: 1.6vh;
+    margin-bottom: 1.6vh;
+    font-size: 1.8em;
+}
+.box h2{
+    color: #707070;
+    font-size: 1.4em;
+}
+.box p{
+    font-size: 1.2em;
+    color: #707070;
+    line-height: 1.2;
+}
+.box table{
+    margin-left: 10%;
+    width: 80%;
+}
+.box .left{
+    width: 30%;
+}
+.box .right{
+    width: 70%;
+}
+.box table tr{
+    line-height: 2;
+}
+.box a{
+    text-decoration: none;
+    color: #8290e7;
+}
+.box a:hover{
+    color: rgb(200, 200, 200);
+    transition: .5s;
+}
+.back{
+    left: 50%;
+    bottom: 24vh;
+    transform: translate(-50%, 0);
+}
+/* スケジュール変更ページ */
+.edit_modal{
+    position: absolute;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    top: 40%;
+    border: #8B8B8B 1px solid;
+    border-radius: 0;
+}
+.edit_modal form{
+    height: none;
+    text-align: left;
+    margin-left: 0%;
+    margin-top: 0%;
+    padding-left: 10%;
+    width: 100%;
+}
+.edit_modal h3{
+    margin: 14px 0;
+}
+.edit_modal h1{
+    margin-bottom: 30px;
+}
+.edit_modal select{
+    margin:0 3%;
+}
+.edit_modal .select_left{
+    margin-left: 16%;
+}
+/* 議事録作成 */
+.minute input{
+    background-color: #dddddd;
+    height: 1.6em;
+}
