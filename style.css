@@ -697,5 +697,36 @@ nav{
 /* 議事録作成 */
 .minute input{
     background-color: #dddddd;
-    height: 1.6em;
+    height: 2em;
+}
+.minute .content{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.minute .view_box{
+    display: inline-flex;
+    flex-direction: column;
+}
+.minute .input_box{
+    display: inline-flex;
+    flex-direction: column;
+    width: 50%;
+}
+.minute .input_box input{
+    margin: 4px;
+}
+.minute .input_box .name{
+    width: 50%;
+}
+.minute .input_box .summary{
+    height: 6em;
+}
+.minute .input_box .title, .minute .input_box .minute, .minute .input_box .decision{
+    height: 3em;
+}
+.minute .team_box{
+}
+.minute .team_box input[type="button"]{
+    width: 40px;
 }

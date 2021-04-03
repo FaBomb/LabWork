@@ -18,7 +18,6 @@
     <div class="wrapper">
         <?php include "../header.html.php" ?>
         <div class="advice">
-
         </div>
         <div class="minute">
             <form action="title.php" method="POST">
@@ -34,27 +33,27 @@
                 </h1>
                 <input type="submit">
             </form>
-            <div class="history">
+            <div class="history team_box">
                 <h2>伝統建築班</h2>
-                <div id="content">
-                    <div id="history_view"></div>
-                    <div id="history_input_0">
-                        <input type="text" id="history_name_0" placeholder="名前"> <br>
-                        <input type="text" id="history_title_0" placeholder="タイトル"> <br>
-                        <input type="text" id="history_summary_0" placeholder="発表概要"> <br>
-                        <input type="text" id="history_minute_0_0" placeholder="議事" onkeypress="enter('history', 'minute', 0, 0)"> <br>
-                        <input type="text" id="history_decision_0_0" placeholder="まとめ" onkeypress="enter('history', 'decision', 0, 0)"> <br>
+                <div class="content">
+                    <div id="history_view" class="view_box"></div>
+                    <div id="history_input_0" class="input_box">
+                        <input type="text" class="name" id="history_name_0" placeholder="名前">
+                        <input type="text" class="title" id="history_title_0" placeholder="タイトル">
+                        <input type="text" class="summary" id="history_summary_0" placeholder="発表概要">
+                        <input type="text" class="minute" id="history_minute_0_0" placeholder="議事" onkeypress="enter('history', 'minute', 0, 0)">
+                        <input type="text" class="decision" id="history_decision_0_0" placeholder="まとめ" onkeypress="enter('history', 'decision', 0, 0)">
                     </div>
                 </div>
                 <input type="button" value="+" onclick="send('history')">
             </div>
-            <div class="city">
+            <div class="city team_box">
                 <h2>都市班</h2>
             </div>
-            <div class="health">
+            <div class="health team_box">
                 <h2>健康班</h2>
             </div>
-            <div class="future">
+            <div class="future team_box">
                 <h2>未来班</h2>
             </div>
         </div>
@@ -98,14 +97,14 @@
 
     }
     let num = 1;
-    function send(arg){
+    function send(team){
         let param = {};
         
-        let name = document.getElementById(arg+"_name_0");
-        let title = document.getElementById(arg+"_title_0");
-        let summary = document.getElementById(arg+"_summary_0");
-        let minute = document.getElementById(arg+"_minute_0_0");
-        let decision = document.getElementById(arg+"_decision_0_0");
+        let name = document.getElementById(team+"_name_0");
+        let title = document.getElementById(team+"_title_0");
+        let summary = document.getElementById(team+"_summary_0");
+        let minute = document.getElementById(team+"_minute_0_0");
+        let decision = document.getElementById(team+"_decision_0_0");
         
         param["name"] = name.value;
         param["title"] = title.value;
@@ -114,27 +113,75 @@
         param["decision"] = decision.value;
         conn.send(JSON.stringify(param));
 
-        let view = document.getElementById(arg+"_view");
-        let input = document.getElementById(arg+"_input_0");
-
+        let view = document.getElementById(team+"_view");
+        let input = document.getElementById(team+"_input_0");
         let input_copy = input.cloneNode(true);
-        input_copy.childNodes.item(1).setAttribute("id", arg+"_name_"+num);
-        input_copy.childNodes.item(5).setAttribute("id", arg+"_title_"+num);
-        input_copy.childNodes.item(9).setAttribute("id", arg+"_summary_"+num);
-        input_copy.childNodes.item(13).setAttribute("id", arg+"_minute_"+num+"_0");
-        input_copy.childNodes.item(13).setAttribute("onkeypress", "enter('"+arg+"', 'minute', "+num+", 0)");
-        input_copy.childNodes.item(17).setAttribute("id", arg+"_decision_"+num+"_0");
-        input_copy.childNodes.item(17).setAttribute("onkeypress", "enter('"+arg+"', 'decision', "+num+", 0)");
+
+        let minute_num = 1;
+        let decision_num = 1;
+        input_copy.childNodes.forEach(function(elem){
+            if (elem.nodeName === "INPUT"){
+                if (elem.id.indexOf("name") !== -1){
+                    elem.setAttribute("id", team+"_name_"+num);
+                }
+                else if (elem.id.indexOf("title") !== -1){
+                    elem.setAttribute("id", team+"_title_"+num);
+                }
+                else if (elem.id.indexOf("summary") !== -1){
+                    elem.setAttribute("id", team+"_summary_"+num);
+                }
+                else if (elem.id.indexOf("minute") !== -1){
+                    if (elem.id === team+"_minute_0_0"){
+                        elem.setAttribute("id", team+"_minute_"+num+"_0");
+                        elem.setAttribute("onkeypress", "enter('"+team+"', 'minute', "+num+", 0)");
+                    }else{
+                        elem.setAttribute("id", team+"_minute_"+num+"_"+minute_num);
+                        elem.setAttribute("onkeypress", "enter('"+team+"', 'minute', "+num+", "+minute_num+")");
+                        minute_num++;
+                    }
+                }
+                else if (elem.id.indexOf("decision") !== -1){
+                    if (elem.id === team+"_decision_0_0"){
+                        elem.setAttribute("id", team+"_decision_"+num+"_0");
+                        elem.setAttribute("onkeypress", "enter('"+team+"', 'decision', "+num+", 0)");
+                    }else{
+                        elem.setAttribute("id", team+"_decision_"+num+"_"+decision_num);
+                        elem.setAttribute("onkeypress", "enter('"+team+"', 'decision', "+num+", "+decision_num+")");
+                        decision_num++;
+                    }
+                }
+            }
+        });
+
+        input.childNodes.forEach(function(elem){
+            if (elem.nodeName === "INPUT"){
+                if (elem.id.indexOf("minute") !== -1){
+                    if (elem.id !== team+"_minute_0_0"){
+                        elem.setAttribute("class", "delete");
+                    }
+                }
+                else if (elem.id.indexOf("decision") !== -1){
+                    if (elem.id !== team+"_decision_0_0"){
+                        elem.setAttribute("class", "delete");
+                    }
+                }
+            }
+        });
+        let del = Array.prototype.slice.call(document.getElementsByClassName("delete"));
+        del.forEach(function(elem){
+            elem.remove();
+        })
 
         let del_button = document.createElement("input");
         del_button.setAttribute("type", "button");
         del_button.setAttribute("value", "-");
-        del_button.setAttribute("onclick", "del('"+arg+"', "+num+")");
+        del_button.setAttribute("onclick", "del('"+team+"', "+num+")");
         input_copy.appendChild(del_button);
 
-        input_copy.setAttribute("id", arg+"_input_"+num);
+        input_copy.setAttribute("id", team+"_input_"+num);
         view.appendChild(input_copy);
         num++;
+
 
         name.value="";
         title.value="";
@@ -156,7 +203,6 @@
         function searchDup(){
             parents.forEach(function(elem){
                 let new_count = count+1;
-                console.log(elem.id)
                 if (elem.id === team+"_"+area+"_"+mark+"_"+new_count){
                     count++;
                     searchDup();
@@ -168,15 +214,19 @@
             let add = document.createElement("input");
             count++;
             add.setAttribute("id", team+"_"+area+"_"+mark+"_"+count);
+            add.setAttribute("class", area);
             add.setAttribute("onkeypress", "enter('"+team+"', '"+area+"', "+mark+", "+count+")");
             add.setAttribute("value", "→");
             
             parent.insertBefore(add, target.nextElementSibling);
             target.nextElementSibling.focus();
+            target.nextElementSibling.setSelectionRange(1, 1);
+
         }else if (window.event.keyCode === 13){
             let add = document.createElement("input");
             count++;
             add.setAttribute("id", team+"_"+area+"_"+mark+"_"+count);
+            add.setAttribute("class", area);
             add.setAttribute("onkeypress", "enter('"+team+"', '"+area+"', "+mark+", "+count+")");
             
             parent.insertBefore(add, target.nextElementSibling);
@@ -184,8 +234,10 @@
         }
         if (window.event.ctrlKey || window.event.metaKey){
             if (window.event.keyCode === 26){
-                target.previousElementSibling.focus();
-                target.remove();
+                if (target.previousElementSibling.id.indexOf(area) !== -1){
+                    target.previousElementSibling.focus();
+                    target.remove();
+                }
             }
         }
     }
