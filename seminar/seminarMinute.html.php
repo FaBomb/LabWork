@@ -292,7 +292,7 @@
                 conn.send(JSON.stringify(param));
             }
 
-        }else if (window.event.keyCode === 13){
+        }else if (window.event.key === "Enter"){
             let add = document.createElement("input");
             count++;
             add.setAttribute("id", team+"_"+area+"_"+mark+"_"+count);
@@ -311,17 +311,16 @@
             }
 
         }
-        if (window.event.ctrlKey || window.event.metaKey){
-            if (window.event.keyCode === 26){
-                if (target.previousElementSibling.id.indexOf(area) !== -1){
-                    target.previousElementSibling.focus();
-                    target.remove();
-                    if (mark !== 0){
-                        param["target"] = target.outerHTML;
-                        conn.send(JSON.stringify(param));
-                    }
+        if ((window.event.ctrlKey || window.event.metaKey)){
+            if (target.previousElementSibling.id.indexOf(area) !== -1){
+                target.previousElementSibling.focus();
+                target.remove();
+                if (mark !== 0){
+                    param["target"] = target.outerHTML;
+                    conn.send(JSON.stringify(param));
                 }
             }
+            
         }
     }
     function close(){
