@@ -726,6 +726,7 @@ nav{
     height: 3em;
 }
 .minute .team_box{
+    text-align: center;
 }
 .minute .team_box input[type="button"]{
     width: 40px;
