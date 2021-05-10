@@ -33,28 +33,6 @@
 
     mysqli_query($conn, $sql);
 
-    $sql = "SELECT MAX(schedule_id) FROM schedules";
-    if ($result = mysqli_query($conn, $sql)){
-        $schedule_id = mysqli_fetch_assoc($result)["MAX(schedule_id)"];
-    }else{
-        echo "データベース接続エラー";
-    }
-    $join_members = $_POST["join_member"];
-    foreach ($join_members as $val){
-        if (strpos($val, ",")){
-            foreach (explode(",", $val) as $inval){
-                echo $inval;
-                $sql = "INSERT INTO joinMembers(schedule_id, user_id)
-                        VALUES($schedule_id, $inval)";
-                mysqli_query($conn, $sql);
-            };
-        }else{
-            $sql = "INSERT INTO joinMembers(schedule_id, user_id)
-                    VALUES($schedule_id, $val)";
-            mysqli_query($conn, $sql);
-            
-        }
-    }
     mysqli_close($conn);
     $extra = "index.html.php";
     header( "Location: https://$host$uri/$extra");

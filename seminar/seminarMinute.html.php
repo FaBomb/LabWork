@@ -1,7 +1,41 @@
 <?php 
     // ログインチェック
     include "../loginCheck.php";
-    unset($_SESSION["year"]);
+
+    // データベース接続
+    include "../dbConnect.php";
+    $number = $_SESSION["number"];
+    $title = $_SESSION["title"];
+    $date = $_SESSION["date"];
+
+    $sql = "SELECT * FROM minutes WHERE number='$number' AND title='$title' AND date='$date'";
+    if ($result = mysqli_query($conn, $sql)){
+        $row = mysqli_fetch_assoc($result);
+        $minute_id = $row["minute_id"];
+        $number = $row["number"];
+        $title = $row["title"];
+        $date = $row["date"];
+        $start_hour = $row["start_hour"];
+        $start_minute = $row["start_minute"];
+        $end_hour = $row["end_hour"];
+        $end_minute = $row["end_minute"];
+    }else{
+        echo "データベース接続エラー";
+    }
+    $sql = "SELECT * FROM atendees WHERE minute_id='$minute_id'";
+    if ($result = mysqli_query($conn, $sql)){
+        while ($row = mysqli_fetch_assoc($result)){
+            if (isset($row["atend"])){
+                $atend_list[] = $row["atend"];
+            }elseif (isset($row["absent"])){
+                $absent_list[] = $row["absent"];
+            }elseif (isset($row["early_leave"])){
+                $early_leave_list[] = $row["early_leave"];
+            }
+        }
+    }else{
+        echo "データベース接続エラー";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,19 +54,43 @@
         <div class="advice">
         </div>
         <div class="minute">
-            <form action="title.php" method="POST">
-                <h1>
-                    第
-                    <input type="number" name="num">
-                    回
-                    <select name="title">
-                        <option value="自主">自主</option>
-                        <option value="本">本</option>
-                    </select>
-                    ゼミ議事録
-                </h1>
-                <input type="submit">
-            </form>
+            <h1>
+                <?php echo "第".$number."回".$title."ゼミ議事録" ?>
+            </h1>
+            <h2>出席者</h2>
+            <p>
+                <?php 
+                    if (isset($atend_list)){
+                        foreach ($atend_list as $key => $val){
+                            echo $val." ";
+                        }
+                    }
+                ?>
+            </p>
+            <h2>欠席者</h2>
+            <p>
+                <?php 
+                    if (isset($absent_list)){
+                        foreach ($absent_list as $key => $val){
+                            echo $val." ";
+                        }
+                    }else{
+                        echo "無";
+                    }
+                ?>
+            </p>
+            <h2>早退者</h2>
+            <p>
+                <?php 
+                    if (isset($early_leave_list)){
+                        foreach ($early_leave_list as $key => $val){
+                            echo $val." ";
+                        }
+                    }else{
+                        echo "無";
+                    }
+                ?>
+            </p>
             <div class="history team_box">
                 <h2>伝統建築班</h2>
                 <div class="content">
@@ -80,7 +138,6 @@
             let receive_data = {};
             receive_data = JSON.parse(e.data);
             if (Object.keys(receive_data)[0] === "add"){
-                
                 let parent = document.createElement('div');
                 let child_target = document.createElement('div');
                 let child_add = document.createElement('div');

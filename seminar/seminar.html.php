@@ -2,6 +2,9 @@
     // ログインチェック
     include "../loginCheck.php";
     unset($_SESSION["year"]);
+
+    // データベース接続
+    include "../dbConnect.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,12 +22,32 @@
         <header>
             <a class="logo" href="../index/index.html.php"><img src="../img/logo.jpg" alt="ロゴ"></a>
             <nav>
-                <a href="../seminar/seminarMinute.html.php">MINUTE</a>
+                <a href="../seminar/createIndex.html.php">MINUTE</a>
                 <a href="../unit/unit.html.php">UNIT</a>
                 <a href="../logout.php">LOGOUT</a>
             </nav>
         </header>
-    
+        <div class="create">
+            <a href="createIndex.html.php">作成</a>
+        </div>
+        <div class="edit">
+            <?php
+                $sql = 'SELECT * FROM minutes';
+                if ($result = mysqli_query($conn, $sql)){
+                    while ($row = mysqli_fetch_assoc($result)){
+                        echo '
+                        <form action="edit.php" method="POST">
+                            <input type="submit" class="title" value="第'.$row["number"].'回'.$row["title"].'ゼミ">
+                            <input type="hidden" name="num" value="'.$row["number"].'">
+                            <input type="hidden" name="title" value="'.$row["title"].'">
+                            <input type="hidden" name="date" value="'.$row["date"].'">
+                        </form>
+                        ';
+                    }
+                }
+                mysqli_close($conn);
+            ?>
+        </div>
         <?php include "../footer.html.php" ?>
     </div>
 </body>

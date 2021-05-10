@@ -731,3 +731,16 @@ nav{
 .minute .team_box input[type="button"]{
     width: 40px;
 }
+.attendees div{
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+    background-color: #B8B8B8;
+}
+.attendees input{
+    width: 50px;
+    background-color: white;
+}
+.create input[type="number"]{
+    background-color: #B8B8B8;
+}

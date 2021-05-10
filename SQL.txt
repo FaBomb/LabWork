@@ -37,3 +37,26 @@ CREATE TABLE joinMembers(
     user_id INT NOT NULL
 
 );
+
+CREATE TABLE minutes(
+    minute_id INT AUTO_INCREMENT,
+    number INT NOT NULL,
+    title TEXT NOT NULL,
+    date TEXT NOT NULL,
+    start_hour INT NOT NULL,
+    start_minute INT NOT NULL,
+    end_hour INT NOT NULL,
+    end_minute INT NOT NULL,
+
+    PRIMARY KEY(minute_id)
+);
+
+CREATE TABLE atendees(
+    atend_id INT AUTO_INCREMENT,
+    minute_id INT,
+    atend TEXT,
+    absent TEXT,
+    early_leave TEXT,
+
+    PRIMARY KEY(atend_id)
+);
